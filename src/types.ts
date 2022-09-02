@@ -3,7 +3,7 @@ export interface ImageSize {
   width: number //高度
 }
 
-export interface OssOptions {
+export interface AliOptions {
   accessKeyId: string
   accessKeySecret: string
   securityToken: string
@@ -21,11 +21,10 @@ export interface UploadInfo {
   sampleCount?: number
   ext: string //后缀名
   duration: number //音频时常
-
   //argument 透传的argument
 }
 
-export interface DataObject {
+export interface FileInfo {
   file: File
   path: string
   baseUrl: string

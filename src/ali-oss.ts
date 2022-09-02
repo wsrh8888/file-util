@@ -1,18 +1,18 @@
 import { fileType, getMd5, getImageAttribute } from './file';
 import OSS from 'ali-oss'
-import { OssOptions, DataObject, UploadInfo } from './types'
+import { AliOptions, FileInfo, UploadInfo } from './types'
 
 
-let ossClient: OSS
+let aliOssClient: OSS
 
 /**
  * @description: 初始化创建一个Oss对象
- * @param {OssOptions} ossInfo
+ * @param {AliOptions} ossInfo
  * @return {*}
  */
-export const createOSS = (ossInfo: OssOptions): OSS => {
-  if (!ossClient) {
-    ossClient = new OSS({
+export const createAliOSS = (ossInfo: AliOptions): OSS => {
+  if (!aliOssClient) {
+    aliOssClient = new OSS({
       region: ossInfo.region,
       bucket: ossInfo.bucket,
       accessKeyId: ossInfo.accessKeyId,
@@ -21,23 +21,23 @@ export const createOSS = (ossInfo: OssOptions): OSS => {
       secure: true
     })
   }
-  return ossClient
+  return aliOssClient
 }
 
 
 /**
  * @description: 上传文件到阿里云
  * @param {DataObject} dataObj
- * @param {OssOptions} ossObject
+ * @param {AliOptions} ossObject
  * @param {string} type
  * @param {any} argument
  * @return {*}
  */
- export const uploadFileToAliOss = async (dataObj: DataObject, ossObject: OssOptions, argument: any): Promise<UploadInfo> => {
-  const { file, path, baseUrl, name } = dataObj
+ export const uploadFileToAliOss = async (FileInfo: FileInfo, AliOptions: AliOptions, argument: any): Promise<UploadInfo> => {
+  const { file, path, baseUrl, name } = FileInfo
 
   let ext = name.substring(name.lastIndexOf('.') + 1)
-  const client: any = await createOSS(ossObject)
+  const client: any = await createAliOSS(AliOptions)
 
   let audioAttribute = {}
   let imageAttribute = {}
@@ -48,13 +48,9 @@ export const createOSS = (ossInfo: OssOptions): OSS => {
 
     const md5 = await getMd5(file)
     const fileName = `${md5}.${ext}`
-    let timestamp
+
     await client.multipartUpload(`${path}/${fileName}`, file, {})
-    const ossObj = await client.getObjectMeta(`${path}/${fileName}`)
-    timestamp = new Date(ossObj.res.headers['last-modified']).getTime()
-    // }
     return {
-      timestamp,
       url: `${baseUrl}/${path}/${fileName}`,
       name: name.substring(0, name.lastIndexOf('.')),
       md5: md5,
@@ -64,6 +60,6 @@ export const createOSS = (ossInfo: OssOptions): OSS => {
       ...audioAttribute
     }
   } catch (e) {
-    throw new Error()
+    throw new Error(`文件删除失败:${e}` )
   }
 }

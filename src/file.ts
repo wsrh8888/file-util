@@ -23,14 +23,14 @@ export const getMd5 = (file: File): Promise<string> => {
  * @param {Blob} file
  * @return {*}
  */
-export const getImageAttribute = (file: Blob): Promise<ImageSize> => {
+export const getImageAttribute = (file: File): Promise<ImageSize> => {
 
   return new Promise((resolve, reject) => {
     let reader = new FileReader()
-    reader.onload = function (e: any) {
-      let txt = e.target.result
+    reader.onload = function (e: ProgressEvent<FileReader>) {
+      let result = e.target?.result
       let img: HTMLImageElement = document.createElement('img')
-      img.src = txt
+      img.src = result as string
       img.onload = function () {
         resolve({
           width: img.width,
@@ -75,5 +75,6 @@ export const fileType = (value: string): string => {
     return ''
   }
 }
+
 
 
