@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "name": "file-util",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es.js",
+  "types": "dist/types/src/index.d.ts",
+  "description": "文件上传以及文件解析的工具包",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "keywords": [
+    "ali-oss",
+    "browser-md5-file",
+    "文件上传",
+    "获取文件md5"
+  ],
+  "./*": "./*",
+  "scripts": {
+    "build": "vite build"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Robert",
+  "license": "ISC",
+  "dependencies": {
+    "@types/ali-oss": "^6.16.4",
+    "ali-oss": "^6.17.1",
+    "browser-md5-file": "^1.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wsrh8888/vue-cli-plugin-xuwu.git"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.4",
+    "typescript": "^4.3.4",
+    "vite": "^2.3.7",
+    "vite-plugin-dts": "^0.9.6"
+  }
+}
