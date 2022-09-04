@@ -1,7 +1,6 @@
-import { fileType, getMd5, getImageAttribute } from './file';
+import { fileType, getMd5, getImageAttribute } from './file'
 import OSS from 'ali-oss'
 import { AliOptions, FileInfo, UploadInfo } from './types'
-
 
 let aliOssClient: OSS
 
@@ -24,7 +23,6 @@ export const createAliOSS = (ossInfo: AliOptions): OSS => {
   return aliOssClient
 }
 
-
 /**
  * @description: 上传文件到阿里云
  * @param {DataObject} dataObj
@@ -33,7 +31,7 @@ export const createAliOSS = (ossInfo: AliOptions): OSS => {
  * @param {any} argument
  * @return {*}
  */
- export const uploadFileToAliOss = async (FileInfo: FileInfo, AliOptions: AliOptions, argument: any): Promise<UploadInfo> => {
+export const uploadFileToAliOss = async (FileInfo: FileInfo, AliOptions: AliOptions, argument: any): Promise<UploadInfo> => {
   const { file, path, baseUrl, name } = FileInfo
 
   let ext = name.substring(name.lastIndexOf('.') + 1)
@@ -60,6 +58,6 @@ export const createAliOSS = (ossInfo: AliOptions): OSS => {
       ...audioAttribute
     }
   } catch (e) {
-    throw new Error(`文件删除失败:${e}` )
+    throw new Error(`文件删除失败:${e}`)
   }
 }

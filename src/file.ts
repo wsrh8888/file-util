@@ -24,8 +24,7 @@ export const getMd5 = (file: File): Promise<string> => {
  * @return {*}
  */
 export const getImageAttribute = (file: File): Promise<ImageSize> => {
-
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     let reader = new FileReader()
     reader.onload = function (e: ProgressEvent<FileReader>) {
       let result = e.target?.result
@@ -75,6 +74,3 @@ export const fileType = (value: string): string => {
     return ''
   }
 }
-
-
-

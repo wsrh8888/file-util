@@ -31,7 +31,7 @@ export interface FileInfo {
   name: string
 }
 
-export enum Type {
-  image,
-  audio
-}
+// export enum Type {
+//   image,
+//   audio
+// }

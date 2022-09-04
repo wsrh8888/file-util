@@ -1,7 +1,5 @@
 // File类型继承于Blob类型
 
-import { resolve } from "path";
-
 /**
  * @description: 将blob文件转为file文件
  * @param {Blob} blob
@@ -9,10 +7,9 @@ import { resolve } from "path";
  * @param {FilePropertyBag} options
  * @return {*}
  */
- export const blobToFile = (blob: Blob,fileName:string, options: FilePropertyBag | undefined):File =>{
-  return new File([blob],fileName, options)
+export const blobToFile = (blob: Blob, fileName: string, options: FilePropertyBag | undefined): File => {
+  return new File([blob], fileName, options)
 }
-
 
 /**
  * @description: 文件转为Base64文件流
@@ -20,22 +17,21 @@ import { resolve } from "path";
  * @return {*}
  */
 export const fileToBase64 = (file: File): Promise<string | null | ArrayBuffer | undefined> => {
-  return new Promise((resolve, reject) => {
-    let fileReader = new FileReader();
-    fileReader.readAsDataURL(file);  
-    fileReader.onload = function (e: ProgressEvent<FileReader>) { 
-      resolve(e.target?.result) 
+  return new Promise((resolve) => {
+    let fileReader = new FileReader()
+    fileReader.readAsDataURL(file)
+    fileReader.onload = function (e: ProgressEvent<FileReader>) {
+      resolve(e.target?.result)
     }
   })
 }
-
 
 /**
  * @description: base64转为Blob
  * @param {File} file
  * @return {*}
  */
-export const base64ToBlob = (base64: string):Promise<Blob> => {
+export const base64ToBlob = (base64: string): Promise<Blob> => {
   return new Promise((resolve) => {
     const arr = base64.split(',')
     const mime = arr[0].match(/:(.*?);/) as RegExpMatchArray
@@ -44,28 +40,27 @@ export const base64ToBlob = (base64: string):Promise<Blob> => {
     let n = bstr.length
     const u8arr = new Uint8Array(n)
     while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
+      u8arr[n] = bstr.charCodeAt(n)
     }
     resolve(new Blob([u8arr], { type: type }))
   })
 }
-
 
 /**
  * @description: 将base64转为file类型
  * @param {*} Promise
  * @return {*}
  */
-export const base64ToFile = (base64: string, filename: string):Promise<File> => {
+export const base64ToFile = (base64: string, filename: string): Promise<File> => {
   return new Promise((resolve) => {
-    var arr = base64.split(',')
+    let arr = base64.split(',')
     const mime = arr[0].match(/:(.*?);/) as RegExpMatchArray
     const bstr = atob(arr[1])
     let n = bstr.length
-    const u8arr = new Uint8Array(n);
-    while(n--){
-      u8arr[n] = bstr.charCodeAt(n);
+    const u8arr = new Uint8Array(n)
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n)
     }
-    return resolve(new File([u8arr], filename, {type:mime[1]}))
+    return resolve(new File([u8arr], filename, { type: mime[1] }))
   })
 }
