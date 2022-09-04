@@ -1,6 +1,6 @@
 import { fileType, getMd5, getImageAttribute } from './file'
 import OSS from 'ali-oss'
-import { AliOptions, FileInfo, UploadInfo } from './types'
+import { AliOptions, UploadInfo } from './types'
 
 let aliOssClient: OSS
 
@@ -24,18 +24,19 @@ export const createAliOSS = (ossInfo: AliOptions): OSS => {
 }
 
 /**
+/**
  * @description: 上传文件到阿里云
- * @param {DataObject} dataObj
- * @param {AliOptions} ossObject
- * @param {string} type
+ * @param {File} file 
+ * @param {string} path 上传的路径
+ * @param {string} baseUrl 上传后的域名
+ * @param {AliOptions} options  阿里云的oss参数
  * @param {any} argument
  * @return {*}
  */
-export const uploadFileToAliOss = async (FileInfo: FileInfo, AliOptions: AliOptions, argument?: any): Promise<UploadInfo> => {
-  const { file, path, baseUrl } = FileInfo
+export const uploadFileToAliOss = async (file: File, path: string,baseUrl: string, options: AliOptions, argument?: any): Promise<UploadInfo> => {
 
   let ext = file.name.substring(file.name.lastIndexOf('.') + 1)
-  const client: any = await createAliOSS(AliOptions)
+  const client: any = await createAliOSS(options)
 
   let audioAttribute = {}
   let imageAttribute = {}

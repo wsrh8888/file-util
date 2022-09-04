@@ -24,11 +24,6 @@ export interface UploadInfo {
   //argument 透传的argument
 }
 
-export interface FileInfo {
-  file: File
-  path: string
-  baseUrl: string
-}
 
 // export enum Type {
 //   image,

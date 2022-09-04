@@ -1,9 +1,8 @@
 import * as QiniuOSS from 'qiniu-js'
 import { fileType, getImageAttribute, getMd5 } from './file'
-import { FileInfo, UploadInfo } from './types'
+import { UploadInfo } from './types'
 
-export const uploadFileToQiniuOss = async (FileInfo: FileInfo, token: string, argument?: any): Promise<UploadInfo> => {
-  const { file, path, baseUrl } = FileInfo
+export const uploadFileToQiniuOss = async (file: File, path: string,baseUrl:string,token: string, argument?: any): Promise<UploadInfo> => {
   let audioAttribute = {}
   let imageAttribute = {}
   
