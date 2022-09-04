@@ -21,11 +21,4 @@ export interface UploadInfo {
   sampleCount?: number
   ext: string //后缀名
   duration: number //音频时常
-  //argument 透传的argument
 }
-
-
-// export enum Type {
-//   image,
-//   audio
-// }

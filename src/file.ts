@@ -44,21 +44,7 @@ export const getImageAttribute = (file: File): Promise<ImageSize> => {
   })
 }
 
-/**
- * @description: 将文件转为流文件
- * @param {Blob} files
- * @return {*}
- */
-export const transferFileToBuffer = (files: Blob): Promise<ArrayBuffer> => {
-  return new Promise((resolve) => {
-    const fileReader = new FileReader()
-    fileReader.onload = function () {
-      const result = fileReader.result as ArrayBuffer
-      resolve(result)
-    }
-    fileReader.readAsArrayBuffer(files)
-  })
-}
+
 
 /**
  * @description: 判断当前文件的类型
@@ -72,5 +58,30 @@ export const fileType = (value: string): string => {
     return 'image'
   } else {
     return ''
+  }
+}
+
+/**
+ * @description: 判断文件是否存在
+ * @param {string} url
+ * @return {*}
+ */
+export const isExistFile = (url:string): Boolean => {
+  let xmlhttp
+  if (window.XMLHttpRequest){
+    xmlhttp=new XMLHttpRequest();
+  }else{
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+ }
+  xmlhttp.open("GET",url,false);
+  xmlhttp.send();
+  if(xmlhttp.readyState === 4){
+    if(xmlhttp.status === 200) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    return false;
   }
 }

@@ -1,4 +1,4 @@
-import { fileType, getMd5, getImageAttribute } from './file'
+import { fileType, getMd5, getImageAttribute, isExistFile } from './file'
 import OSS from 'ali-oss'
 import { AliOptions, UploadInfo } from './types'
 
@@ -47,8 +47,9 @@ export const uploadFileToAliOss = async (file: File, path: string,baseUrl: strin
 
     const md5 = await getMd5(file)
     const fileName = `${md5}.${ext}`
-
-    await client.multipartUpload(`${path}/${fileName}`, file, {})
+    if (!isExistFile(`${baseUrl}/${path}/${fileName}`)) {
+      await client.multipartUpload(`${path}/${fileName}`, file, {})
+    }
     return {
       url: `${baseUrl}/${path}/${fileName}`,
       name: file.name.substring(0, file.name.lastIndexOf('.')),

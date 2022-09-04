@@ -64,3 +64,19 @@ export const base64ToFile = (base64: string, filename: string): Promise<File> =>
     return resolve(new File([u8arr], filename, { type: mime[1] }))
   })
 }
+
+/**
+ * @description: 将文件转为流文件
+ * @param {Blob} files
+ * @return {*}
+ */
+ export const fileToBuffer = (files: File): Promise<ArrayBuffer> => {
+  return new Promise((resolve) => {
+    const fileReader = new FileReader()
+    fileReader.onload = function () {
+      const result = fileReader.result as ArrayBuffer
+      resolve(result)
+    }
+    fileReader.readAsArrayBuffer(files)
+  })
+}
