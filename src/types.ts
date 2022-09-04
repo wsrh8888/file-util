@@ -28,7 +28,6 @@ export interface FileInfo {
   file: File
   path: string
   baseUrl: string
-  name: string
 }
 
 // export enum Type {

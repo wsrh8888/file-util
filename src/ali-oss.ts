@@ -31,10 +31,10 @@ export const createAliOSS = (ossInfo: AliOptions): OSS => {
  * @param {any} argument
  * @return {*}
  */
-export const uploadFileToAliOss = async (FileInfo: FileInfo, AliOptions: AliOptions, argument: any): Promise<UploadInfo> => {
-  const { file, path, baseUrl, name } = FileInfo
+export const uploadFileToAliOss = async (FileInfo: FileInfo, AliOptions: AliOptions, argument?: any): Promise<UploadInfo> => {
+  const { file, path, baseUrl } = FileInfo
 
-  let ext = name.substring(name.lastIndexOf('.') + 1)
+  let ext = file.name.substring(file.name.lastIndexOf('.') + 1)
   const client: any = await createAliOSS(AliOptions)
 
   let audioAttribute = {}
@@ -50,7 +50,7 @@ export const uploadFileToAliOss = async (FileInfo: FileInfo, AliOptions: AliOpti
     await client.multipartUpload(`${path}/${fileName}`, file, {})
     return {
       url: `${baseUrl}/${path}/${fileName}`,
-      name: name.substring(0, name.lastIndexOf('.')),
+      name: file.name.substring(0, file.name.lastIndexOf('.')),
       md5: md5,
       ext: ext,
       ...imageAttribute,
