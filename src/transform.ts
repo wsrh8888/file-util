@@ -1,3 +1,6 @@
+// File类型继承于Blob类型
+
+import { resolve } from "path";
 
 /**
  * @description: 将blob文件转为file文件
@@ -27,3 +30,42 @@ export const fileToBase64 = (file: File): Promise<string | null | ArrayBuffer | 
 }
 
 
+/**
+ * @description: base64转为Blob
+ * @param {File} file
+ * @return {*}
+ */
+export const base64ToBlob = (base64: string):Promise<Blob> => {
+  return new Promise((resolve) => {
+    const arr = base64.split(',')
+    const mime = arr[0].match(/:(.*?);/) as RegExpMatchArray
+    const type = mime[0]
+    const bstr = atob(arr[1])
+    let n = bstr.length
+    const u8arr = new Uint8Array(n)
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    resolve(new Blob([u8arr], { type: type }))
+  })
+}
+
+
+/**
+ * @description: 将base64转为file类型
+ * @param {*} Promise
+ * @return {*}
+ */
+export const base64ToFile = (base64: string, filename: string):Promise<File> => {
+  return new Promise((resolve) => {
+    var arr = base64.split(',')
+    const mime = arr[0].match(/:(.*?);/) as RegExpMatchArray
+    const bstr = atob(arr[1])
+    let n = bstr.length
+    const u8arr = new Uint8Array(n);
+    while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return resolve(new File([u8arr], filename, {type:mime[1]}))
+  })
+}
