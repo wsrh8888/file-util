@@ -70,7 +70,7 @@ export const base64ToFile = (base64: string, filename: string): Promise<File> =>
  * @param {Blob} files
  * @return {*}
  */
- export const fileToBuffer = (files: File): Promise<ArrayBuffer> => {
+ export const fileToBuffer = (files: Blob|File): Promise<ArrayBuffer> => {
   return new Promise((resolve) => {
     const fileReader = new FileReader()
     fileReader.onload = function () {

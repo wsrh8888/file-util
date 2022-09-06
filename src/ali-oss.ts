@@ -47,9 +47,9 @@ export const uploadFileToAliOss = async (file: File, path: string,baseUrl: strin
 
     const md5 = await getMd5(file)
     const fileName = `${md5}.${ext}`
-    if (!isExistFile(`${baseUrl}/${path}/${fileName}`)) {
-      await client.multipartUpload(`${path}/${fileName}`, file, {})
-    }
+    // if (!isExistFile(`${baseUrl}/${path}/${fileName}`)) {
+    await client.multipartUpload(`${path}/${fileName}`, file, {})
+    // }
     return {
       url: `${baseUrl}/${path}/${fileName}`,
       name: file.name.substring(0, file.name.lastIndexOf('.')),
