@@ -73,7 +73,7 @@ export const isExistFile = (url:string): Boolean => {
   }else{
     xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
  }
-  xmlhttp.open("GET",url,false);
+  xmlhttp.open("GET",`${url}?${new Date().getTime()}`,false);
   xmlhttp.send();
   if(xmlhttp.readyState === 4){
     if(xmlhttp.status === 200) {
