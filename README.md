@@ -1,5 +1,5 @@
 # file-utils-plus
-阿里云，七牛云、上传能力的封装，file，blob，base64之间的相互转换，以及文件常用的能力
+AliOss, QiniuOss and other upload capabilities，common functions of files。
 
 ## Installation
 
