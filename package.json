@@ -4,7 +4,7 @@
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/types/src/index.d.ts",
-  "description": "文件上传以及文件解析的工具包",
+  "description": "文件上传以及常用的公共方法",
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
@@ -18,7 +18,8 @@
     "md5",
     "qiniuyun",
     "md5",
-    "blob"
+    "blob",
+    "base64"
   ],
   "./*": "./*",
   "scripts": {
