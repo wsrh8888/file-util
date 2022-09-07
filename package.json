@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "file-util",
+  "name": "file-utils-plus",
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
   "types": "dist/types/src/index.d.ts",
@@ -14,8 +14,11 @@
   "keywords": [
     "ali-oss",
     "browser-md5-file",
-    "文件上传",
-    "获取文件md5"
+    "upload",
+    "md5",
+    "qiniuyun",
+    "md5",
+    "blob"
   ],
   "./*": "./*",
   "scripts": {
