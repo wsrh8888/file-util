@@ -36,14 +36,14 @@ export const uploadFileToQiniuOss = async (file: File, path: string,baseUrl:stri
 ### file
 1. get file md5
 
-    ```javascript
-    const getMd5: (file: File) => Promise<string>;
-    ```
+  ```javascript
+  const getMd5: (file: File) => Promise<string>;
+  ```
 2. get image attribute
 
-    ```javascript
-    const getImageAttribute: (file: File) => Promise<ImageSize>;
-    ```
+  ```javascript
+  const getImageAttribute: (file: File) => Promise<ImageSize>;
+  ```
 3. check the file exists
 
   ```javascript
