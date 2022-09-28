@@ -2,25 +2,20 @@ import { fileType, getMd5, getImageAttribute } from './file'
 import OSS from 'ali-oss'
 import { AliOptions, UploadInfo } from './types'
 
-let aliOssClient: OSS
-
 /**
  * @description: 初始化创建一个Oss对象
  * @param {AliOptions} ossInfo
  * @return {*}
  */
 export const createAliOSS = (ossInfo: AliOptions): OSS => {
-  if (!aliOssClient) {
-    aliOssClient = new OSS({
-      region: ossInfo.region,
-      bucket: ossInfo.bucket,
-      accessKeyId: ossInfo.accessKeyId,
-      accessKeySecret: ossInfo.accessKeySecret,
-      stsToken: ossInfo.securityToken,
-      secure: true
-    })
-  }
-  return aliOssClient
+  return new OSS({
+    region: ossInfo.region,
+    bucket: ossInfo.bucket,
+    accessKeyId: ossInfo.accessKeyId,
+    accessKeySecret: ossInfo.accessKeySecret,
+    stsToken: ossInfo.securityToken,
+    secure: true
+  })
 }
 
 /**
@@ -57,6 +52,6 @@ export const uploadFileToAliOss = async (file: File, path: string,baseUrl: strin
       ...audioAttribute
     }
   } catch (e) {
-    throw new Error(`文件删除失败:${e}`)
+    throw new Error(`文件上传失败:${e}`)
   }
 }
