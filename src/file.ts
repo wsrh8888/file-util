@@ -44,8 +44,6 @@ export const getImageAttribute = (file: File): Promise<ImageSize> => {
   })
 }
 
-
-
 /**
  * @description: 判断当前文件的类型
  * @param {string} value
@@ -66,22 +64,22 @@ export const fileType = (value: string): string => {
  * @param {string} url
  * @return {*}
  */
-export const isExistFile = (url:string): Boolean => {
+export const isExistFile = (url: string): Boolean => {
   let xmlhttp
-  if (window.XMLHttpRequest){
-    xmlhttp=new XMLHttpRequest();
-  }else{
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
- }
-  xmlhttp.open("GET",`${url}?${new Date().getTime()}`,false);
-  xmlhttp.send();
-  if(xmlhttp.readyState === 4){
-    if(xmlhttp.status === 200) {
+  if (window.XMLHttpRequest) {
+    xmlhttp = new XMLHttpRequest()
+  } else {
+    xmlhttp = new ActiveXObject('Microsoft.XMLHTTP')
+  }
+  xmlhttp.open('GET', `${url}?${new Date().getTime()}`, false)
+  xmlhttp.send()
+  if (xmlhttp.readyState === 4) {
+    if (xmlhttp.status === 200) {
       return true
     } else {
       return false
     }
   } else {
-    return false;
+    return false
   }
 }

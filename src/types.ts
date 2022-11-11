@@ -22,3 +22,19 @@ export interface UploadInfo {
   ext: string //后缀名
   duration: number //音频时常
 }
+
+export interface UploadOss {
+  file: File //文件
+  path: string //上传的路径
+  baseUrl: string //域名
+  fileName?: string //文件名字，如果没有默认为该文件的md5
+  argument?: any //自定义参数
+}
+
+export interface AliUploadOss extends UploadOss {
+  options: AliOptions //ali oss数据
+}
+
+export interface QiNiuUploadOss extends UploadOss {
+  token: string //凭证
+}

@@ -7,7 +7,7 @@
  * @param {FilePropertyBag} options
  * @return {*}
  */
-export const blobToFile = (blob: Blob, fileName: string, options: FilePropertyBag | undefined): File => {
+export const blobToFile = (blob: Blob, fileName: string, options?: FilePropertyBag | undefined): File => {
   return new File([blob], fileName, options)
 }
 
@@ -70,7 +70,7 @@ export const base64ToFile = (base64: string, filename: string): Promise<File> =>
  * @param {Blob} files
  * @return {*}
  */
- export const fileToBuffer = (files: Blob|File): Promise<ArrayBuffer> => {
+export const fileToBuffer = (files: Blob | File): Promise<ArrayBuffer> => {
   return new Promise((resolve) => {
     const fileReader = new FileReader()
     fileReader.onload = function () {
@@ -78,5 +78,24 @@ export const base64ToFile = (base64: string, filename: string): Promise<File> =>
       resolve(result)
     }
     fileReader.readAsArrayBuffer(files)
+  })
+}
+
+/**
+ * @description: 通过url地址将文件转为file类型
+ * @param {Blob} files
+ * @return {*}
+ */
+export const urlToFile = (url: string): Promise<File> => {
+  return new Promise((resolve) => {
+    let http = new XMLHttpRequest()
+    http.open('GET', url, true)
+    http.responseType = 'blob'
+    http.onload = function (e: any) {
+      if (this.status === 200 || this.status === 0) {
+        resolve(blobToFile(e.target.response, url.substring(url.lastIndexOf('/') + 1)))
+      }
+    }
+    http.send()
   })
 }
